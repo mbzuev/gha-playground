@@ -47,5 +47,3 @@ jobs:
 
       - name: test echo
         run: echo 'lalala'
-
-¡
