@@ -1,0 +1,50 @@
+name: Algs build and push
+
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Select environment 
+        required: true
+        options: 
+        - staging
+        - beta
+        - stable
+        - eu-aws
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
+  cancel-in-progress: false
+jobs:
+  env:
+    runs-on: ubuntu-latest
+    outputs:
+      ENVIRONMENT: ${{ steps.staging.outputs.ENVIRONMENT || steps.beta.outputs.ENVIRONMENT || steps.stable.outputs.ENVIRONMENT || steps.eu-aws.outputs.ENVIRONMENT  }}
+    steps:
+      - if: github.event.inputs.environment == 'staging'
+        id: staging
+        run: echo "{ENVIRONMENT}={staging}" >> "$GITHUB_OUTPUT"
+      - if: github.event.inputs.environment == 'beta'
+        id: beta
+        run: echo "{ENVIRONMENT}={beta}" >> "$GITHUB_OUTPUT"
+      - if: github.event.inputs.environment == 'stable'
+        id: stable
+        run: echo "{ENVIRONMENT}={stable}" >> "$GITHUB_OUTPUT"
+      - if: github.event.inputs.environment == 'eu-aws'
+        id: eu-aws
+        run: echo "{ENVIRONMENT}={eu-aws}" >> "$GITHUB_OUTPUT"
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: test echo
+        run: echo 'lalala'
+
