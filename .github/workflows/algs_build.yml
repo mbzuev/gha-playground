@@ -36,7 +36,7 @@ jobs:
       - if: github.event.inputs.environment == 'eu-aws'
         id: eu-aws
         run: echo "{ENVIRONMENT}={eu-aws}" >> $GITHUB_OUTPUT
-  build:
+  deployment:
     runs-on: ubuntu-latest
 
     steps:
