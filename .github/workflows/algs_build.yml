@@ -15,6 +15,7 @@ on:
         - beta
         - stable
         - eu-aws
+        - tyuio
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
   cancel-in-progress: false
