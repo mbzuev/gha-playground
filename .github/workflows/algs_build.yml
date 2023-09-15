@@ -26,16 +26,16 @@ jobs:
     steps:
       - if: github.event.inputs.environment == 'staging'
         id: staging
-        run: echo "{ENVIRONMENT}={staging}" >> "$GITHUB_OUTPUT"
+        run: echo "{ENVIRONMENT}={staging}" >> $GITHUB_OUTPUT
       - if: github.event.inputs.environment == 'beta'
         id: beta
-        run: echo "{ENVIRONMENT}={beta}" >> "$GITHUB_OUTPUT"
+        run: echo "{ENVIRONMENT}={beta}" >> $GITHUB_OUTPUT
       - if: github.event.inputs.environment == 'stable'
         id: stable
-        run: echo "{ENVIRONMENT}={stable}" >> "$GITHUB_OUTPUT"
+        run: echo "{ENVIRONMENT}={stable}" >> $GITHUB_OUTPUT
       - if: github.event.inputs.environment == 'eu-aws'
         id: eu-aws
-        run: echo "{ENVIRONMENT}={eu-aws}" >> "$GITHUB_OUTPUT"
+        run: echo "{ENVIRONMENT}={eu-aws}" >> $GITHUB_OUTPUT
   build:
     runs-on: ubuntu-latest
 
@@ -48,3 +48,4 @@ jobs:
       - name: test echo
         run: echo 'lalala'
 
+¡
