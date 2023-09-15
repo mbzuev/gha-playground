@@ -38,7 +38,7 @@ jobs:
         run: echo "{ENVIRONMENT}={eu-aws}" >> $GITHUB_OUTPUT
   deployment:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
